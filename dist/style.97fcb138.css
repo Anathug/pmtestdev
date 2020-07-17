@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+@font-face {
+  font-family: "Wulkan Display";
+  src: url("/Wulkan-Display-Light.3de83dfe.otf") format("opentype");
+}
+* {
+  --main-bg-color: black;
+  --main-text-color: #f20000;
+  --main-text-size: 8rem;
+  --small-text-size: 0.8rem;
+  margin: 0;
+}
+
+p {
+  color: var(--main-text-color);
+  font-size: var(--main-text-size);
+  text-transform: uppercase;
+  line-height: 6.5rem;
+  z-index: 2;
+  position: relative;
+}
+
+span {
+  color: var(--main-text-color);
+  font-size: var(--small-text-size);
+  z-index: 2;
+}
+
+body,
+html {
+  font-family: "Wulkan Display";
+  margin: 0;
+  background-color: black;
+}
+body .home,
+html .home {
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 2vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+body .home__first-row,
+html .home__first-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+body .home__first-row__first-text-wrapper,
+html .home__first-row__first-text-wrapper {
+  line-height: 6.5rem;
+  display: flex;
+  flex-direction: column;
+}
+body .home__second-row,
+html .home__second-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+body .home__second-row__second-text-wrapper__scroll-action span,
+html .home__second-row__second-text-wrapper__scroll-action span {
+  font-family: "Lato", sans-serif;
+  font-size: 0.8rem;
+  text-transform: none;
+}
+body .home__second-row__second-text-wrapper__scroll-action__line,
+html .home__second-row__second-text-wrapper__scroll-action__line {
+  height: 2px;
+  width: 100%;
+  background-color: red;
+}
+body .home__background-image,
+html .home__background-image {
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+body .home__background-image img,
+html .home__background-image img {
+  height: 80vh;
+}
+body .slide-1__background-image,
+html .slide-1__background-image {
+  background: url("/IMAGE.79b87201.jpg");
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+}
+
+/*# sourceMappingURL=/style.97fcb138.css.map */
