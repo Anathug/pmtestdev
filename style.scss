@@ -65,12 +65,49 @@ html {
         }
     }
 
-    .slide-1 {
-        &__background-image {
-            background: url('./assets/img/IMAGE.jpg');
+    .slide-1,
+    .slide-2 {
+
+        &__container {
             height: 100vh;
             background-size: cover;
             background-position: center;
+
+            &__content-wrapper {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+
+                &__text-wrapper {
+                    position: absolute;
+
+                    p {
+                        color: white;
+                        font-size: 7rem;
+                    }
+                }
+
+                &__image {
+                    img {
+                        height: 60vh;
+                    }
+                }
+            }
+        }
+
+    }
+
+    .slide-1 {
+        &__container {
+            background-image: url('./assets/img/Background_1.jpg');
+        }
+    }
+
+    .slide-2 {
+        &__container {
+            background-image: url('./assets/img/Background_2.jpg');
         }
     }
 }

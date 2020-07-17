@@ -6,16 +6,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
 * {
-    --main-bg-color: black;
-    --main-text-color: #f20000;
-    --main-text-size: 8rem;
-    --small-text-size: 0.8rem;
+    --home-bg-color: black;
+    --home-text-color: #f20000;
+    --home-text-size: 8rem;
+    --home-small-text-size: 0.8rem;
     margin: 0;
 }
 
 p {
-    color: var(--main-text-color);
-    font-size: var(--main-text-size);
+    color: var(--home-text-color);
+    font-size: var(--home-text-size);
     text-transform: uppercase;
     line-height: 6.5rem;
     z-index: 2;
@@ -23,7 +23,7 @@ p {
 }
 
 span {
-    color: var(--main-text-color);
-    font-size: var(--small-text-size);
+    color: var(--home-text-color);
+    font-size: var(--home-small-text-size);
     z-index: 2;
 }
