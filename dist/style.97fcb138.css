@@ -19,6 +19,9 @@ p {
   z-index: 2;
   position: relative;
 }
+p span {
+  font-size: var(--home-text-size);
+}
 
 span {
   color: var(--home-text-color);
@@ -30,16 +33,19 @@ body,
 html {
   font-family: "Wulkan Display";
   margin: 0;
-  background-color: black;
 }
 body .home,
 html .home {
+  background-color: black;
   height: 100vh;
+  width: 100vw;
   box-sizing: border-box;
   padding: 2vw;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  z-index: 1;
+  position: fixed;
 }
 body .home__first-row,
 html .home__first-row {
@@ -52,6 +58,16 @@ html .home__first-row__first-text-wrapper {
   line-height: 6.5rem;
   display: flex;
   flex-direction: column;
+}
+body .home__first-row__first-text-wrapper__splitting-1,
+html .home__first-row__first-text-wrapper__splitting-1 {
+  position: relative;
+  overflow: hidden;
+}
+body .home__first-row__first-text-wrapper__splitting-2,
+html .home__first-row__first-text-wrapper__splitting-2 {
+  position: relative;
+  overflow: hidden;
 }
 body .home__second-row,
 html .home__second-row {
@@ -67,9 +83,9 @@ html .home__second-row__second-text-wrapper__scroll-action span {
 }
 body .home__second-row__second-text-wrapper__scroll-action__line,
 html .home__second-row__second-text-wrapper__scroll-action__line {
-  height: 2px;
+  height: 1px;
   width: 100%;
-  background-color: red;
+  background-color: var(--home-text-color);
 }
 body .home__background-image,
 html .home__background-image {
@@ -83,13 +99,22 @@ body .home__background-image img,
 html .home__background-image img {
   height: 80vh;
 }
+body .slide-1,
+body .slide-2,
+html .slide-1,
+html .slide-2 {
+  width: 100vw;
+}
 body .slide-1__container,
 body .slide-2__container,
 html .slide-1__container,
 html .slide-2__container {
-  height: 100vh;
+  height: 140vh;
+  width: 140vw;
   background-size: cover;
   background-position: center;
+  margin-top: -20vh;
+  margin-left: -20vw;
 }
 body .slide-1__container__content-wrapper,
 body .slide-2__container__content-wrapper,
@@ -107,22 +132,31 @@ html .slide-1__container__content-wrapper__text-wrapper,
 html .slide-2__container__content-wrapper__text-wrapper {
   position: absolute;
 }
-body .slide-1__container__content-wrapper__text-wrapper p,
-body .slide-2__container__content-wrapper__text-wrapper p,
-html .slide-1__container__content-wrapper__text-wrapper p,
-html .slide-2__container__content-wrapper__text-wrapper p {
+body .slide-1__container__content-wrapper__text-wrapper .char,
+body .slide-2__container__content-wrapper__text-wrapper .char,
+html .slide-1__container__content-wrapper__text-wrapper .char,
+html .slide-2__container__content-wrapper__text-wrapper .char {
   color: white;
-  font-size: 7rem;
 }
 body .slide-1__container__content-wrapper__image img,
 body .slide-2__container__content-wrapper__image img,
 html .slide-1__container__content-wrapper__image img,
 html .slide-2__container__content-wrapper__image img {
-  height: 60vh;
+  height: 55vh;
+}
+body .slide-1,
+html .slide-1 {
+  z-index: 2;
+  position: fixed;
 }
 body .slide-1__container,
 html .slide-1__container {
   background-image: url("/Background_1.e2434892.jpg");
+}
+body .slide-2,
+html .slide-2 {
+  z-index: 3;
+  position: fixed;
 }
 body .slide-2__container,
 html .slide-2__container {

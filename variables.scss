@@ -1,29 +1,32 @@
 @font-face {
-    font-family: "Wulkan Display";
-    src: url("./assets/fonts/Wulkan-Display-Light.otf") format("opentype");
+  font-family: "Wulkan Display";
+  src: url("./assets/fonts/Wulkan-Display-Light.otf") format("opentype");
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 
 * {
-    --home-bg-color: black;
-    --home-text-color: #f20000;
-    --home-text-size: 8rem;
-    --home-small-text-size: 0.8rem;
-    margin: 0;
+  --home-bg-color: black;
+  --home-text-color: #f20000;
+  --home-text-size: 8rem;
+  --home-small-text-size: 0.8rem;
+  margin: 0;
 }
 
 p {
-    color: var(--home-text-color);
+  color: var(--home-text-color);
+  font-size: var(--home-text-size);
+  text-transform: uppercase;
+  line-height: 6.5rem;
+  z-index: 2;
+  position: relative;
+  span {
     font-size: var(--home-text-size);
-    text-transform: uppercase;
-    line-height: 6.5rem;
-    z-index: 2;
-    position: relative;
+  }
 }
 
 span {
-    color: var(--home-text-color);
-    font-size: var(--home-small-text-size);
-    z-index: 2;
+  color: var(--home-text-color);
+  font-size: var(--home-small-text-size);
+  z-index: 2;
 }
