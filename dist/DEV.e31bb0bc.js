@@ -8284,6 +8284,7 @@ var dom = {
     },
     section2: {
       section: document.querySelector(".slide-2"),
+      text: document.querySelectorAll(".slide-2__container__content-wrapper__text-wrapper__splitting .char"),
       bgImg: document.querySelector(".slide-2__container img"),
       img: document.querySelector(".slide-2__container__content-wrapper__image img")
     }
@@ -8366,7 +8367,28 @@ var animations = {
     y: -1000,
     duration: 2,
     ease: imgEase
-  }, 0.6)
+  }, 0.6),
+  section2: section2Tl.from(dom.content.section2.bgImg, {
+    y: '250vh',
+    duration: 2,
+    scale: 1.5,
+    rotation: -30,
+    x: 600,
+    ease: bgEase
+  }).from(dom.content.section2.text, {
+    x: 100,
+    y: 400,
+    skewX: 50,
+    skewY: 50,
+    stagger: 0.1,
+    opacity: 0,
+    duration: 3,
+    ease: textEase
+  }, 0.6).from(dom.content.section2.img, {
+    y: 1000,
+    duration: 2,
+    ease: imgEase
+  }, 0.7)
 };
 
 var handleWheel = function handleWheel(e) {
@@ -8391,13 +8413,13 @@ var handleWheel = function handleWheel(e) {
   }
 
   if (currentIndex == 1) {
-    animations.section1.play(); // animations.section2.reverse();
+    animations.section1.restart();
+    animations.section2.reverse();
   }
 
   if (currentIndex == 2) {
-    animations.section1Leaving.play(); //onComplete
-
-    animations.section2.delay(1).play();
+    animations.section1Leaving.restart();
+    animations.section2.play();
   }
 
   window.removeEventListener("mousewheel", handleWheel);
