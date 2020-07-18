@@ -8240,6 +8240,47 @@ return Splitting;
 
 })));
 
+},{}],"assets/scripts/dom.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _default = function _default() {
+  var dom = {
+    content: {
+      home: {
+        section: document.querySelector(".home"),
+        firstRow: {
+          firstText: document.querySelectorAll(".home__first-row__first-text-wrapper__splitting-1 .char"),
+          secondText: document.querySelectorAll(".home__first-row__first-text-wrapper__splitting-2 .char"),
+          thirdText: document.querySelectorAll(".home__first-row__second-text-wrapper__splitting .char")
+        },
+        secondRow: document.querySelectorAll(".home__second-row__first-text-wrapper__splitting .char"),
+        img: document.querySelector(".home__background-image img")
+      },
+      section1: {
+        section: document.querySelector(".slide-1"),
+        text: document.querySelectorAll(".slide-1__container__content-wrapper__text-wrapper__splitting .char"),
+        bgImgContainer: document.querySelector(".slide-1__container"),
+        bgImg: document.querySelector(".slide-1__container img"),
+        img: document.querySelector(".slide-1__container__content-wrapper__image img")
+      },
+      section2: {
+        section: document.querySelector(".slide-2"),
+        text: document.querySelectorAll(".slide-2__container__content-wrapper__text-wrapper__splitting .char"),
+        bgImgContainer: document.querySelector(".slide-2__container"),
+        bgImg: document.querySelector(".slide-2__container img"),
+        img: document.querySelector(".slide-2__container__content-wrapper__image img")
+      }
+    }
+  };
+  return dom;
+};
+
+exports.default = _default;
 },{}],"index.js":[function(require,module,exports) {
 "use strict";
 
@@ -8255,44 +8296,19 @@ require("splitting/dist/splitting-cells.css");
 
 var _splitting2 = _interopRequireDefault(require("splitting"));
 
+var _dom = _interopRequireDefault(require("./assets/scripts/dom"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _gsap.gsap.registerPlugin(_CustomEase.CustomEase);
 
-var target = document.querySelectorAll(".home__first-row__first-text-wrapper__splitting-1, .home__first-row__first-text-wrapper__splitting-2, .home__first-row__second-text-wrapper__splitting, .home__second-row__first-text-wrapper__splitting, .slide-1__container__content-wrapper__text-wrapper__splitting, .slide-2__container__content-wrapper__text-wrapper__splitting");
-var results = (0, _splitting2.default)({
+var target = document.querySelectorAll('[data-split]');
+(0, _splitting2.default)({
   target: target,
   by: "chars"
 });
 var currentIndex = 0;
-var dom = {
-  content: {
-    home: {
-      section: document.querySelector(".home"),
-      firstRow: {
-        firstText: document.querySelectorAll(".home__first-row__first-text-wrapper__splitting-1 .char"),
-        secondText: document.querySelectorAll(".home__first-row__first-text-wrapper__splitting-2 .char"),
-        thirdText: document.querySelectorAll(".home__first-row__second-text-wrapper__splitting .char")
-      },
-      secondRow: document.querySelectorAll(".home__second-row__first-text-wrapper__splitting .char"),
-      img: document.querySelector(".home__background-image img")
-    },
-    section1: {
-      section: document.querySelector(".slide-1"),
-      text: document.querySelectorAll(".slide-1__container__content-wrapper__text-wrapper__splitting .char"),
-      bgImgContainer: document.querySelector(".slide-1__container"),
-      bgImg: document.querySelector(".slide-1__container img"),
-      img: document.querySelector(".slide-1__container__content-wrapper__image img")
-    },
-    section2: {
-      section: document.querySelector(".slide-2"),
-      text: document.querySelectorAll(".slide-2__container__content-wrapper__text-wrapper__splitting .char"),
-      bgImgContainer: document.querySelector(".slide-2__container"),
-      bgImg: document.querySelector(".slide-2__container img"),
-      img: document.querySelector(".slide-2__container__content-wrapper__image img")
-    }
-  }
-};
+var dom = (0, _dom.default)();
 var gsapTimeline = [_gsap.gsap.timeline(), _gsap.gsap.timeline({
   paused: true
 }), _gsap.gsap.timeline({
@@ -8442,7 +8458,7 @@ var handleWheel = function handleWheel(e) {
 };
 
 window.addEventListener("mousewheel", handleWheel);
-},{"./assets/scripts/utils":"assets/scripts/utils.js","gsap":"../../../node_modules/gsap/index.js","./assets/scripts/vendor/gsap/CustomEase":"assets/scripts/vendor/gsap/CustomEase.js","splitting/dist/splitting.css":"node_modules/splitting/dist/splitting.css","splitting/dist/splitting-cells.css":"node_modules/splitting/dist/splitting-cells.css","splitting":"node_modules/splitting/dist/splitting.js"}],"../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./assets/scripts/utils":"assets/scripts/utils.js","gsap":"../../../node_modules/gsap/index.js","./assets/scripts/vendor/gsap/CustomEase":"assets/scripts/vendor/gsap/CustomEase.js","splitting/dist/splitting.css":"node_modules/splitting/dist/splitting.css","splitting/dist/splitting-cells.css":"node_modules/splitting/dist/splitting-cells.css","splitting":"node_modules/splitting/dist/splitting.js","./assets/scripts/dom":"assets/scripts/dom.js"}],"../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;

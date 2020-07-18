@@ -4,59 +4,17 @@ import { CustomEase } from "./assets/scripts/vendor/gsap/CustomEase"
 import "splitting/dist/splitting.css";
 import "splitting/dist/splitting-cells.css";
 import Splitting from "splitting";
+import  getDom  from "./assets/scripts/dom";
 
 gsap.registerPlugin(CustomEase);
 
-const target = document.querySelectorAll(
-  ".home__first-row__first-text-wrapper__splitting-1, .home__first-row__first-text-wrapper__splitting-2, .home__first-row__second-text-wrapper__splitting, .home__second-row__first-text-wrapper__splitting, .slide-1__container__content-wrapper__text-wrapper__splitting, .slide-2__container__content-wrapper__text-wrapper__splitting"
-);
-const results = Splitting({ target: target, by: "chars" });
+
+const target = document.querySelectorAll('[data-split]')
+Splitting({ target: target, by: "chars" });
 
 let currentIndex = 0;
-let dom = {
-  content: {
-    home: {
-      section: document.querySelector(".home"),
-      firstRow: {
-        firstText: document.querySelectorAll(
-          ".home__first-row__first-text-wrapper__splitting-1 .char"
-        ),
-        secondText: document.querySelectorAll(
-          ".home__first-row__first-text-wrapper__splitting-2 .char"
-        ),
-        thirdText: document.querySelectorAll(
-            ".home__first-row__second-text-wrapper__splitting .char"
-        )
-      },
-      secondRow: document.querySelectorAll(
-        ".home__second-row__first-text-wrapper__splitting .char"
-      ),
-      img: document.querySelector(".home__background-image img"),
-    },
-    section1: {
-      section: document.querySelector(".slide-1"),
-      text: document.querySelectorAll(
-        ".slide-1__container__content-wrapper__text-wrapper__splitting .char"
-      ),
-      bgImgContainer: document.querySelector(".slide-1__container"),
-      bgImg: document.querySelector(".slide-1__container img"),
-      img: document.querySelector(
-        ".slide-1__container__content-wrapper__image img"
-      ),
-    },
-    section2: {
-      section: document.querySelector(".slide-2"),
-       text: document.querySelectorAll(
-        ".slide-2__container__content-wrapper__text-wrapper__splitting .char"
-      ),
-      bgImgContainer: document.querySelector(".slide-2__container"),
-      bgImg: document.querySelector(".slide-2__container img"),
-      img: document.querySelector(
-        ".slide-2__container__content-wrapper__image img"
-      ),
-    },
-  },
-};
+
+const dom = getDom()
 
 const gsapTimeline = [gsap.timeline(), gsap.timeline({ paused: true }), gsap.timeline({ paused: true }),gsap.timeline({ paused: true}) ]
 const easings = {
@@ -90,7 +48,7 @@ const animations = {
       stagger: 0.05,
       duration: 1,
     }, 1)
-        .from(dom.content.home.firstRow.thirdText, {
+    .from(dom.content.home.firstRow.thirdText, {
       y: 200,
       stagger: 0.05,
       duration: 1.5,
