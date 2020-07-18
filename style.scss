@@ -87,10 +87,11 @@ html {
         height: 100%;
         overflow: hidden;
         transform-origin: right top;
-    background-color: var(--home-text-color);
+        background-color: var(--home-text-color);
 
         &__img {
             width: 110vw;
+            height: 110vh;
             top: -5vh; 
             left: -5vw; 
             position: absolute;

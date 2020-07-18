@@ -127,6 +127,7 @@ body .slide-2__container__img,
 html .slide-1__container__img,
 html .slide-2__container__img {
   width: 110vw;
+  height: 110vh;
   top: -5vh;
   left: -5vw;
   position: absolute;
