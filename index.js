@@ -1,8 +1,11 @@
 import { MathHelper } from "./utils";
-import gsap from "gsap";
+import { gsap, Power4 } from "gsap";
+import { CustomEase } from "./assets/scripts/vendor/gsap/CustomEase"
 import "splitting/dist/splitting.css";
 import "splitting/dist/splitting-cells.css";
 import Splitting from "splitting";
+
+gsap.registerPlugin(CustomEase);
 
 const target = document.querySelectorAll(
   ".home__first-row__first-text-wrapper__splitting-1, .home__first-row__first-text-wrapper__splitting-2, .home__second-row__first-text-wrapper__splitting, .slide-1__container__content-wrapper__text-wrapper__splitting, .slide-2__container__content-wrapper__text-wrapper__splitting"
@@ -49,7 +52,12 @@ let dom = {
 
 let homeTl = gsap.timeline();
 let section1Tl = gsap.timeline({ paused: true });
-let section2Tl = gsap.timeline({ paused: true });
+let section1TlLeaving = gsap.timeline({ paused: true });
+let section2Tl = gsap.timeline({ paused: true, delay: 1 });
+
+const bgEase = CustomEase.create('bgEase', '0.78, 0.00, 0.14, 1.00');
+const textEase = CustomEase.create('textEase', '0.33, 0.00, 0.00, 1.00')
+const imgEase = CustomEase.create('imgEase', '0.63, 0.00, 0.27, 1.00')
 
 let animations = {
   home: homeTl
@@ -71,30 +79,48 @@ let animations = {
       delay: -0.7,
     }),
   section1: section1Tl
+      .from(dom.content.section1.text, {
+      x: 100,
+      y: 300,
+      skewX: 50,
+      skewY:50,
+      stagger: 0.1,
+      opacity: 0,
+      duration: 3,
+      ease: textEase
+    })
     .from(dom.content.section1.bgImg, {
       y: 1500,
-      duration: 1,
+      duration: 2,
+      scale: 1.3,
       rotation: -40,
       x: 400,
-    })
-    .from(dom.content.section1.text, {
-      y: 200,
-      stagger: 0.1,
-      delay: -0.5,
-      opacity: 0,
-      duration: 1,
-    })
+      ease: bgEase
+    },0.5)
     .from(
       dom.content.section1.img,
       {
         y: 1000,
-        duration: 1,
+        duration: 2,
+        ease: imgEase
       },
-      0.5
+      0.7
     ),
+  section1Leaving: section1TlLeaving.to(dom.content.section1.text, {
+      y: -200,
+      stagger: 0.1,
+      opacity: 0,
+      duration: 1,
+  })
+  .to(dom.content.section1.img, {
+      y: -1000,
+      duration: 2
+  }, 0.5),
   section2: section2Tl.from(dom.content.section2.bgImg, {
-    opacity: 0,
-    y: 1000,
+    y: 1500,
+    duration: 1,
+    rotation: -40,
+    x: 400,
   }),
 };
 
@@ -121,9 +147,9 @@ const handleWheel = (e) => {
     animations.section2.reverse();
   }
   if (currentIndex == 2) {
-    animations.section1.reverse();
-    animations.section2.delay(2);
-    animations.section2.play();
+    animations.section1Leaving.play()
+    //onComplete
+    animations.section2.delay(1).play();
   }
   window.removeEventListener("mousewheel", handleWheel);
   setTimeout(() => {
