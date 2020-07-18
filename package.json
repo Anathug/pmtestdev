@@ -14,7 +14,8 @@
     "sass": "^1.26.10"
   },
   "dependencies": {
-    "splitting": "^1.0.6",
-    "gsap": "./assets/scripts/vendor/gsap"
+    "destyle.css": "^1.0.13",
+    "gsap": "./assets/scripts/vendor/gsap",
+    "splitting": "^1.0.6"
   }
 }

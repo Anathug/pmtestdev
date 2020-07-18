@@ -117,7 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"utils.js":[function(require,module,exports) {
+})({"assets/scripts/utils.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8243,7 +8243,7 @@ return Splitting;
 },{}],"index.js":[function(require,module,exports) {
 "use strict";
 
-var _utils = require("./utils");
+var _utils = require("./assets/scripts/utils");
 
 var _gsap = require("gsap");
 
@@ -8279,42 +8279,34 @@ var dom = {
     section1: {
       section: document.querySelector(".slide-1"),
       text: document.querySelectorAll(".slide-1__container__content-wrapper__text-wrapper__splitting .char"),
+      bgImgContainer: document.querySelector(".slide-1__container"),
       bgImg: document.querySelector(".slide-1__container img"),
       img: document.querySelector(".slide-1__container__content-wrapper__image img")
     },
     section2: {
       section: document.querySelector(".slide-2"),
       text: document.querySelectorAll(".slide-2__container__content-wrapper__text-wrapper__splitting .char"),
+      bgImgContainer: document.querySelector(".slide-2__container"),
       bgImg: document.querySelector(".slide-2__container img"),
       img: document.querySelector(".slide-2__container__content-wrapper__image img")
     }
   }
 };
-
-var homeTl = _gsap.gsap.timeline();
-
-var section1Tl = _gsap.gsap.timeline({
+var gsapTimeline = [_gsap.gsap.timeline(), _gsap.gsap.timeline({
   paused: true
-});
-
-var section1TlLeaving = _gsap.gsap.timeline({
+}), _gsap.gsap.timeline({
   paused: true
-});
-
-var section2Tl = _gsap.gsap.timeline({
+}), _gsap.gsap.timeline({
   paused: true
-});
-
-var bgEase = _CustomEase.CustomEase.create('bgEase', '0.78, 0.00, 0.14, 1.00');
-
-var textEase = _CustomEase.CustomEase.create('textEase', '0.33, 0.00, 0.00, 1.00');
-
-var imgEase = _CustomEase.CustomEase.create('imgEase', '0.63, 0.00, 0.27, 1.00');
-
-var textLeavingEase = _CustomEase.CustomEase.create('textLeavingEase', '0.50, 0.00, 0.19, 1.00');
-
+})];
+var easings = {
+  bg: _CustomEase.CustomEase.create('bgEase', '0.78, 0.00, 0.14, 1.00'),
+  text: _CustomEase.CustomEase.create('textEase', '0.33, 0.00, 0.00, 1.00'),
+  img: _CustomEase.CustomEase.create('imgEase', '0.63, 0.00, 0.27, 1.00'),
+  textLeaving: _CustomEase.CustomEase.create('textLeavingEase', '0.50, 0.00, 0.19, 1.00')
+};
 var animations = {
-  home: homeTl.from(dom.content.home.firstRow.firstText, {
+  home: gsapTimeline[0].from(dom.content.home.firstRow.firstText, {
     y: 200,
     stagger: 0.05,
     duration: 1
@@ -8329,14 +8321,19 @@ var animations = {
     duration: 1,
     delay: -0.7
   }),
-  section1: section1Tl.from(dom.content.section1.bgImg, {
-    y: '10vh',
+  section1: gsapTimeline[1].from(dom.content.section1.bgImgContainer, {
+    y: '100vh',
     duration: 2,
     scale: 1.5,
-    rotation: -80,
-    x: '50vw',
-    ease: bgEase
-  }).from(dom.content.section1.text, {
+    rotation: -30,
+    x: '20vw',
+    ease: easings.bg
+  }).from(dom.content.section1.bgImg, {
+    duration: 2,
+    scale: 1.5,
+    rotation: -30,
+    ease: easings.bg
+  }, 0.2).from(dom.content.section1.text, {
     x: 100,
     y: 400,
     skewX: 50,
@@ -8344,13 +8341,13 @@ var animations = {
     stagger: 0.1,
     opacity: 0,
     duration: 3,
-    ease: textEase
+    ease: easings.text
   }, 0.6).from(dom.content.section1.img, {
     y: 1000,
     duration: 2,
-    ease: imgEase
+    ease: easings.img
   }, 0.7),
-  section1Leaving: section1TlLeaving.to(dom.content.section1.text, {
+  section1Leaving: gsapTimeline[2].to(dom.content.section1.text, {
     x: 100,
     y: -400,
     skewX: 50,
@@ -8358,25 +8355,30 @@ var animations = {
     stagger: -0.1,
     opacity: 0,
     duration: 3,
-    ease: textLeavingEase
+    ease: easings.text
   }).to(dom.content.section1.bgImg, {
     scale: 1.5,
     rotation: -80,
-    ease: bgEase,
+    ease: easings.bg,
     duration: 2
   }, 0.6).to(dom.content.section1.img, {
     y: -1000,
     duration: 2,
-    ease: imgEase
+    ease: easings.img
   }, 0.6),
-  section2: section2Tl.from(dom.content.section2.bgImg, {
-    y: '130vh',
+  section2: gsapTimeline[3].from(dom.content.section2.bgImgContainer, {
+    y: '100vh',
     duration: 2,
     scale: 1.5,
     rotation: -30,
-    x: 600,
-    ease: bgEase
-  }).from(dom.content.section2.text, {
+    x: '20vw',
+    ease: easings.bg
+  }).from(dom.content.section2.bgImg, {
+    duration: 2,
+    scale: 1.5,
+    rotation: -30,
+    ease: easings.bg
+  }, 0.2).from(dom.content.section2.text, {
     x: 100,
     y: 400,
     skewX: 50,
@@ -8384,11 +8386,11 @@ var animations = {
     stagger: 0.1,
     opacity: 0,
     duration: 3,
-    ease: textEase
+    ease: easings.text
   }, 0.6).from(dom.content.section2.img, {
     y: 1000,
     duration: 2,
-    ease: imgEase
+    ease: easings.img
   }, 0.7)
 };
 
@@ -8430,7 +8432,7 @@ var handleWheel = function handleWheel(e) {
 };
 
 window.addEventListener("mousewheel", handleWheel);
-},{"./utils":"utils.js","gsap":"../../../node_modules/gsap/index.js","./assets/scripts/vendor/gsap/CustomEase":"assets/scripts/vendor/gsap/CustomEase.js","splitting/dist/splitting.css":"node_modules/splitting/dist/splitting.css","splitting/dist/splitting-cells.css":"node_modules/splitting/dist/splitting-cells.css","splitting":"node_modules/splitting/dist/splitting.js"}],"../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./assets/scripts/utils":"assets/scripts/utils.js","gsap":"../../../node_modules/gsap/index.js","./assets/scripts/vendor/gsap/CustomEase":"assets/scripts/vendor/gsap/CustomEase.js","splitting/dist/splitting.css":"node_modules/splitting/dist/splitting.css","splitting/dist/splitting-cells.css":"node_modules/splitting/dist/splitting-cells.css","splitting":"node_modules/splitting/dist/splitting.js"}],"../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -8458,7 +8460,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50613" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63072" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

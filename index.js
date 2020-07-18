@@ -1,5 +1,5 @@
-import { MathHelper } from "./utils";
-import { gsap, Power4 } from "gsap";
+import { MathHelper } from "./assets/scripts/utils";
+import { gsap } from "gsap";
 import { CustomEase } from "./assets/scripts/vendor/gsap/CustomEase"
 import "splitting/dist/splitting.css";
 import "splitting/dist/splitting-cells.css";
@@ -35,6 +35,7 @@ let dom = {
       text: document.querySelectorAll(
         ".slide-1__container__content-wrapper__text-wrapper__splitting .char"
       ),
+      bgImgContainer: document.querySelector(".slide-1__container"),
       bgImg: document.querySelector(".slide-1__container img"),
       img: document.querySelector(
         ".slide-1__container__content-wrapper__image img"
@@ -45,6 +46,7 @@ let dom = {
        text: document.querySelectorAll(
         ".slide-2__container__content-wrapper__text-wrapper__splitting .char"
       ),
+      bgImgContainer: document.querySelector(".slide-2__container"),
       bgImg: document.querySelector(".slide-2__container img"),
       img: document.querySelector(
         ".slide-2__container__content-wrapper__image img"
@@ -53,19 +55,16 @@ let dom = {
   },
 };
 
-let homeTl = gsap.timeline();
-let section1Tl = gsap.timeline({ paused: true });
-let section1TlLeaving = gsap.timeline({ paused: true });
-let section2Tl = gsap.timeline({ paused: true});
+const gsapTimeline = [gsap.timeline(), gsap.timeline({ paused: true }), gsap.timeline({ paused: true }),gsap.timeline({ paused: true}) ]
+const easings = {
+    bg: CustomEase.create('bgEase', '0.78, 0.00, 0.14, 1.00'),
+    text: CustomEase.create('textEase', '0.33, 0.00, 0.00, 1.00'),
+    img:  CustomEase.create('imgEase', '0.63, 0.00, 0.27, 1.00'),
+    textLeaving: CustomEase.create('textLeavingEase', '0.50, 0.00, 0.19, 1.00')
+}
 
-
-const bgEase = CustomEase.create('bgEase', '0.78, 0.00, 0.14, 1.00');
-const textEase = CustomEase.create('textEase', '0.33, 0.00, 0.00, 1.00')
-const imgEase = CustomEase.create('imgEase', '0.63, 0.00, 0.27, 1.00')
-const textLeavingEase = CustomEase.create('textLeavingEase', '0.50, 0.00, 0.19, 1.00')
-
-let animations = {
-  home: homeTl
+const animations = {
+  home: gsapTimeline[0]
     .from(dom.content.home.firstRow.firstText, {
       y: 200,
       stagger: 0.05,
@@ -83,15 +82,21 @@ let animations = {
       duration: 1,
       delay: -0.7,
     }),
-  section1: section1Tl
-    .from(dom.content.section1.bgImg, {
-      y: '10vh',
+  section1: gsapTimeline[1]
+    .from(dom.content.section1.bgImgContainer, {
+      y: '100vh',
       duration: 2,
       scale: 1.5,
-      rotation: -80,
-      x: '50vw',
-      ease: bgEase
+      rotation: -30,
+      x: '20vw',
+      ease: easings.bg
     })
+    .from(dom.content.section1.bgImg, {
+      duration: 2,
+      scale: 1.5,
+      rotation: -30,
+      ease: easings.bg
+    }, 0.2)
     .from(dom.content.section1.text, {
       x: 100,
       y: 400,
@@ -100,18 +105,18 @@ let animations = {
       stagger: 0.1,
       opacity: 0,
       duration: 3,
-      ease: textEase
+      ease: easings.text
     }, 0.6)
     .from(
       dom.content.section1.img,
       {
         y: 1000,
         duration: 2,
-        ease: imgEase
+        ease: easings.img
       },
       0.7
     ),
-  section1Leaving: section1TlLeaving
+  section1Leaving: gsapTimeline[2]
       .to(dom.content.section1.text, {
       x: 100,
       y: -400,
@@ -120,12 +125,12 @@ let animations = {
       stagger: -0.1,
       opacity: 0,
       duration: 3,
-      ease: textLeavingEase
+      ease: easings.text
     })
   .to(dom.content.section1.bgImg, {
       scale: 1.5,
       rotation: -80,
-      ease: bgEase,
+      ease: easings.bg,
       duration: 2
     }, 0.6)
     .to(
@@ -133,19 +138,25 @@ let animations = {
       {
         y: -1000,
         duration: 2,
-        ease: imgEase
+        ease: easings.img
       },
       0.6
     ),
-    section2: section2Tl
-      .from(dom.content.section2.bgImg, {
-      y: '130vh',
+    section2: gsapTimeline[3]
+       .from(dom.content.section2.bgImgContainer, {
+      y: '100vh',
       duration: 2,
       scale: 1.5,
       rotation: -30,
-      x: 600,
-      ease: bgEase
+      x: '20vw',
+      ease: easings.bg
     })
+    .from(dom.content.section2.bgImg, {
+      duration: 2,
+      scale: 1.5,
+      rotation: -30,
+      ease: easings.bg
+    }, 0.2)
     .from(dom.content.section2.text, {
       x: 100,
       y: 400,
@@ -154,14 +165,14 @@ let animations = {
       stagger: 0.1,
       opacity: 0,
       duration: 3,
-      ease: textEase
+      ease: easings.text
     }, 0.6)
     .from(
       dom.content.section2.img,
       {
         y: 1000,
         duration: 2,
-        ease: imgEase
+        ease: easings.img
       },
       0.7
     ),

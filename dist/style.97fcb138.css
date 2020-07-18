@@ -113,16 +113,19 @@ body .slide-2__container,
 html .slide-1__container,
 html .slide-2__container {
   height: 100%;
+  overflow: hidden;
+  transform-origin: right top;
 }
 body .slide-1__container__img,
 body .slide-2__container__img,
 html .slide-1__container__img,
 html .slide-2__container__img {
-  height: 140vh;
-  top: -20vh;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
   position: absolute;
-  left: -10vw;
-  transform-origin: right;
+  object-fit: cover;
 }
 body .slide-1__container__content-wrapper,
 body .slide-2__container__content-wrapper,
