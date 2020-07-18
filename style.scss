@@ -85,7 +85,8 @@ html {
             height: 140vh;
             top: -20vh;
             position: absolute;
-            left: -20vw;
+            left: -10vw;
+            transform-origin: right;
         }
 
       &__content-wrapper {

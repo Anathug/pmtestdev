@@ -8302,8 +8302,7 @@ var section1TlLeaving = _gsap.gsap.timeline({
 });
 
 var section2Tl = _gsap.gsap.timeline({
-  paused: true,
-  delay: 1
+  paused: true
 });
 
 var bgEase = _CustomEase.CustomEase.create('bgEase', '0.78, 0.00, 0.14, 1.00');
@@ -8311,6 +8310,8 @@ var bgEase = _CustomEase.CustomEase.create('bgEase', '0.78, 0.00, 0.14, 1.00');
 var textEase = _CustomEase.CustomEase.create('textEase', '0.33, 0.00, 0.00, 1.00');
 
 var imgEase = _CustomEase.CustomEase.create('imgEase', '0.63, 0.00, 0.27, 1.00');
+
+var textLeavingEase = _CustomEase.CustomEase.create('textLeavingEase', '0.50, 0.00, 0.19, 1.00');
 
 var animations = {
   home: homeTl.from(dom.content.home.firstRow.firstText, {
@@ -8329,11 +8330,11 @@ var animations = {
     delay: -0.7
   }),
   section1: section1Tl.from(dom.content.section1.bgImg, {
-    y: '250vh',
+    y: '10vh',
     duration: 2,
     scale: 1.5,
     rotation: -80,
-    x: 600,
+    x: '50vw',
     ease: bgEase
   }).from(dom.content.section1.text, {
     x: 100,
@@ -8357,7 +8358,7 @@ var animations = {
     stagger: -0.1,
     opacity: 0,
     duration: 3,
-    ease: textEase
+    ease: textLeavingEase
   }).to(dom.content.section1.bgImg, {
     scale: 1.5,
     rotation: -80,
@@ -8369,7 +8370,7 @@ var animations = {
     ease: imgEase
   }, 0.6),
   section2: section2Tl.from(dom.content.section2.bgImg, {
-    y: '250vh',
+    y: '130vh',
     duration: 2,
     scale: 1.5,
     rotation: -30,
@@ -8408,7 +8409,7 @@ var handleWheel = function handleWheel(e) {
   }
 
   if (currentIndex == 0) {
-    animations.home.play();
+    animations.home.restart().delay(3);
     animations.section1.reverse();
   }
 
@@ -8425,7 +8426,7 @@ var handleWheel = function handleWheel(e) {
   window.removeEventListener("mousewheel", handleWheel);
   setTimeout(function () {
     window.addEventListener("mousewheel", handleWheel);
-  }, 1000);
+  }, 2000);
 };
 
 window.addEventListener("mousewheel", handleWheel);

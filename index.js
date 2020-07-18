@@ -56,12 +56,13 @@ let dom = {
 let homeTl = gsap.timeline();
 let section1Tl = gsap.timeline({ paused: true });
 let section1TlLeaving = gsap.timeline({ paused: true });
-let section2Tl = gsap.timeline({ paused: true, delay: 1 });
+let section2Tl = gsap.timeline({ paused: true});
 
 
 const bgEase = CustomEase.create('bgEase', '0.78, 0.00, 0.14, 1.00');
 const textEase = CustomEase.create('textEase', '0.33, 0.00, 0.00, 1.00')
 const imgEase = CustomEase.create('imgEase', '0.63, 0.00, 0.27, 1.00')
+const textLeavingEase = CustomEase.create('textLeavingEase', '0.50, 0.00, 0.19, 1.00')
 
 let animations = {
   home: homeTl
@@ -84,11 +85,11 @@ let animations = {
     }),
   section1: section1Tl
     .from(dom.content.section1.bgImg, {
-      y: '250vh',
+      y: '10vh',
       duration: 2,
       scale: 1.5,
       rotation: -80,
-      x: 600,
+      x: '50vw',
       ease: bgEase
     })
     .from(dom.content.section1.text, {
@@ -119,7 +120,7 @@ let animations = {
       stagger: -0.1,
       opacity: 0,
       duration: 3,
-      ease: textEase
+      ease: textLeavingEase
     })
   .to(dom.content.section1.bgImg, {
       scale: 1.5,
@@ -138,7 +139,7 @@ let animations = {
     ),
     section2: section2Tl
       .from(dom.content.section2.bgImg, {
-      y: '250vh',
+      y: '130vh',
       duration: 2,
       scale: 1.5,
       rotation: -30,
@@ -181,7 +182,7 @@ const handleWheel = (e) => {
       console.log("error");
   }
   if (currentIndex == 0) {
-    animations.home.play();
+    animations.home.restart().delay(3);
     animations.section1.reverse();
   }
   if (currentIndex == 1) {
@@ -190,12 +191,12 @@ const handleWheel = (e) => {
   }
   if (currentIndex == 2) {
     animations.section1Leaving.restart()
-    animations.section2.play();
+    animations.section2.play()
   }
   window.removeEventListener("mousewheel", handleWheel);
   setTimeout(() => {
     window.addEventListener("mousewheel", handleWheel);
-  }, 1000);
+  }, 2000);
 };
 
 window.addEventListener("mousewheel", handleWheel);

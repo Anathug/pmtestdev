@@ -121,7 +121,8 @@ html .slide-2__container__img {
   height: 140vh;
   top: -20vh;
   position: absolute;
-  left: -20vw;
+  left: -10vw;
+  transform-origin: right;
 }
 body .slide-1__container__content-wrapper,
 body .slide-2__container__content-wrapper,
