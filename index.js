@@ -1,13 +1,10 @@
 import { MathHelper } from "./assets/scripts/utils";
 import { gsap } from "gsap";
-import { CustomEase } from "./assets/scripts/vendor/gsap/CustomEase"
+import easings from "./assets/scripts/easings"
 import "splitting/dist/splitting.css";
 import "splitting/dist/splitting-cells.css";
 import Splitting from "splitting";
 import  getDom  from "./assets/scripts/dom";
-
-gsap.registerPlugin(CustomEase);
-
 
 const target = document.querySelectorAll('[data-split]')
 Splitting({ target: target, by: "chars" });
@@ -17,12 +14,7 @@ let currentIndex = 0;
 const dom = getDom()
 
 const gsapTimeline = [gsap.timeline(), gsap.timeline({ paused: true }), gsap.timeline({ paused: true }),gsap.timeline({ paused: true}) ]
-const easings = {
-    bg: CustomEase.create('bgEase', '0.78, 0.00, 0.14, 1.00'),
-    text: CustomEase.create('textEase', '0.33, 0.00, 0.00, 1.00'),
-    img:  CustomEase.create('imgEase', '0.63, 0.00, 0.27, 1.00'),
-    textLeaving: CustomEase.create('textLeavingEase', '0.50, 0.00, 0.19, 1.00')
-}
+
 
 const animations = {
   home: gsapTimeline[0]

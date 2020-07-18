@@ -7661,7 +7661,28 @@ var CustomEase = /*#__PURE__*/function () {
 exports.default = exports.CustomEase = CustomEase;
 _getGSAP() && gsap.registerPlugin(CustomEase);
 CustomEase.version = "3.4.0";
-},{"./utils/paths.js":"assets/scripts/vendor/gsap/utils/paths.js"}],"../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"./utils/paths.js":"assets/scripts/vendor/gsap/utils/paths.js"}],"assets/scripts/easings.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _gsap = require("gsap");
+
+var _CustomEase = require("./vendor/gsap/CustomEase");
+
+_gsap.gsap.registerPlugin(_CustomEase.CustomEase);
+
+var _default = {
+  bg: _CustomEase.CustomEase.create('bgEase', '0.78, 0.00, 0.14, 1.00'),
+  text: _CustomEase.CustomEase.create('textEase', '0.33, 0.00, 0.00, 1.00'),
+  img: _CustomEase.CustomEase.create('imgEase', '0.63, 0.00, 0.27, 1.00'),
+  textLeaving: _CustomEase.CustomEase.create('textLeavingEase', '0.50, 0.00, 0.19, 1.00')
+};
+exports.default = _default;
+},{"gsap":"../../../node_modules/gsap/index.js","./vendor/gsap/CustomEase":"assets/scripts/vendor/gsap/CustomEase.js"}],"../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -8249,7 +8270,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 
 var _default = function _default() {
-  var dom = {
+  return {
     content: {
       home: {
         section: document.querySelector(".home"),
@@ -8277,7 +8298,6 @@ var _default = function _default() {
       }
     }
   };
-  return dom;
 };
 
 exports.default = _default;
@@ -8288,7 +8308,7 @@ var _utils = require("./assets/scripts/utils");
 
 var _gsap = require("gsap");
 
-var _CustomEase = require("./assets/scripts/vendor/gsap/CustomEase");
+var _easings = _interopRequireDefault(require("./assets/scripts/easings"));
 
 require("splitting/dist/splitting.css");
 
@@ -8299,8 +8319,6 @@ var _splitting2 = _interopRequireDefault(require("splitting"));
 var _dom = _interopRequireDefault(require("./assets/scripts/dom"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-_gsap.gsap.registerPlugin(_CustomEase.CustomEase);
 
 var target = document.querySelectorAll('[data-split]');
 (0, _splitting2.default)({
@@ -8316,27 +8334,21 @@ var gsapTimeline = [_gsap.gsap.timeline(), _gsap.gsap.timeline({
 }), _gsap.gsap.timeline({
   paused: true
 })];
-var easings = {
-  bg: _CustomEase.CustomEase.create('bgEase', '0.78, 0.00, 0.14, 1.00'),
-  text: _CustomEase.CustomEase.create('textEase', '0.33, 0.00, 0.00, 1.00'),
-  img: _CustomEase.CustomEase.create('imgEase', '0.63, 0.00, 0.27, 1.00'),
-  textLeaving: _CustomEase.CustomEase.create('textLeavingEase', '0.50, 0.00, 0.19, 1.00')
-};
 var animations = {
   home: gsapTimeline[0].from(dom.content.home.img, {
     y: '90vh',
     duration: 3,
-    ease: easings.bg
+    ease: _easings.default.bg
   }).from(dom.content.home.firstRow.firstText, {
     y: 200,
     stagger: 0.05,
     duration: 1.5,
-    ease: easings.text
+    ease: _easings.default.text
   }, 0).from(dom.content.home.firstRow.secondText, {
     y: 200,
     stagger: 0.05,
     duration: 1.5,
-    ease: easings.text
+    ease: _easings.default.text
   }, 0.3).from(dom.content.home.secondRow, {
     y: 200,
     stagger: 0.05,
@@ -8345,7 +8357,7 @@ var animations = {
     y: 200,
     stagger: 0.05,
     duration: 1.5,
-    ease: easings.text
+    ease: _easings.default.text
   }, 1),
   section1: gsapTimeline[1].from(dom.content.section1.bgImgContainer, {
     y: '100vh',
@@ -8353,12 +8365,12 @@ var animations = {
     scale: 1.5,
     rotation: -30,
     x: '20vw',
-    ease: easings.bg
+    ease: _easings.default.bg
   }).from(dom.content.section1.bgImg, {
     duration: 2.5,
     scale: 1.5,
     rotation: -30,
-    ease: easings.bg
+    ease: _easings.default.bg
   }, 0.2).from(dom.content.section1.text, {
     x: 100,
     y: 400,
@@ -8367,11 +8379,11 @@ var animations = {
     stagger: 0.1,
     opacity: 0,
     duration: 3,
-    ease: easings.text
+    ease: _easings.default.text
   }, 0.6).from(dom.content.section1.img, {
     y: 1000,
     duration: 2,
-    ease: easings.img
+    ease: _easings.default.img
   }, 0.7),
   section1Leaving: gsapTimeline[2].to(dom.content.section1.text, {
     x: 100,
@@ -8381,27 +8393,27 @@ var animations = {
     stagger: -0.1,
     opacity: 0,
     duration: 4,
-    ease: easings.text
+    ease: _easings.default.text
   }).to(dom.content.section1.bgImg, {
     scale: 2,
     rotation: -80,
-    ease: easings.bg,
+    ease: _easings.default.bg,
     duration: 3
   }, 0.5).to(dom.content.section1.img, {
     y: -1000,
     duration: 2,
-    ease: easings.img
+    ease: _easings.default.img
   }, 0.1),
   section2: gsapTimeline[3].from(dom.content.section2.bgImgContainer, {
     y: '120vh',
     duration: 2,
     rotation: -40,
-    ease: easings.bg,
+    ease: _easings.default.bg,
     delay: 1
   }).from(dom.content.section2.bgImg, {
     duration: 3,
     rotation: 40,
-    ease: easings.bg
+    ease: _easings.default.bg
   }, 0.8).from(dom.content.section2.text, {
     x: 100,
     y: 400,
@@ -8410,11 +8422,11 @@ var animations = {
     stagger: 0.1,
     opacity: 0,
     duration: 3,
-    ease: easings.text
+    ease: _easings.default.text
   }, 0.6).from(dom.content.section2.img, {
     y: 1000,
     duration: 2,
-    ease: easings.img
+    ease: _easings.default.img
   }, 0.7)
 };
 
@@ -8458,7 +8470,7 @@ var handleWheel = function handleWheel(e) {
 };
 
 window.addEventListener("mousewheel", handleWheel);
-},{"./assets/scripts/utils":"assets/scripts/utils.js","gsap":"../../../node_modules/gsap/index.js","./assets/scripts/vendor/gsap/CustomEase":"assets/scripts/vendor/gsap/CustomEase.js","splitting/dist/splitting.css":"node_modules/splitting/dist/splitting.css","splitting/dist/splitting-cells.css":"node_modules/splitting/dist/splitting-cells.css","splitting":"node_modules/splitting/dist/splitting.js","./assets/scripts/dom":"assets/scripts/dom.js"}],"../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./assets/scripts/utils":"assets/scripts/utils.js","gsap":"../../../node_modules/gsap/index.js","./assets/scripts/easings":"assets/scripts/easings.js","splitting/dist/splitting.css":"node_modules/splitting/dist/splitting.css","splitting/dist/splitting-cells.css":"node_modules/splitting/dist/splitting-cells.css","splitting":"node_modules/splitting/dist/splitting.js","./assets/scripts/dom":"assets/scripts/dom.js"}],"../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -8486,7 +8498,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63072" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61470" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

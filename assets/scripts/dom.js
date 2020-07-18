@@ -1,5 +1,5 @@
 export default () => {
-	let dom = {
+	return {
 		content: {
 			home: {
 				section: document.querySelector(".home"),
@@ -43,6 +43,4 @@ export default () => {
 			},
 		}
 	}
-
-	return dom
 }
