@@ -8,7 +8,7 @@ import Splitting from "splitting";
 gsap.registerPlugin(CustomEase);
 
 const target = document.querySelectorAll(
-  ".home__first-row__first-text-wrapper__splitting-1, .home__first-row__first-text-wrapper__splitting-2, .home__second-row__first-text-wrapper__splitting, .slide-1__container__content-wrapper__text-wrapper__splitting, .slide-2__container__content-wrapper__text-wrapper__splitting"
+  ".home__first-row__first-text-wrapper__splitting-1, .home__first-row__first-text-wrapper__splitting-2, .home__first-row__second-text-wrapper__splitting, .home__second-row__first-text-wrapper__splitting, .slide-1__container__content-wrapper__text-wrapper__splitting, .slide-2__container__content-wrapper__text-wrapper__splitting"
 );
 const results = Splitting({ target: target, by: "chars" });
 
@@ -24,6 +24,9 @@ let dom = {
         secondText: document.querySelectorAll(
           ".home__first-row__first-text-wrapper__splitting-2 .char"
         ),
+        thirdText: document.querySelectorAll(
+            ".home__first-row__second-text-wrapper__splitting .char"
+        )
       },
       secondRow: document.querySelectorAll(
         ".home__second-row__first-text-wrapper__splitting .char"
@@ -60,39 +63,51 @@ const easings = {
     bg: CustomEase.create('bgEase', '0.78, 0.00, 0.14, 1.00'),
     text: CustomEase.create('textEase', '0.33, 0.00, 0.00, 1.00'),
     img:  CustomEase.create('imgEase', '0.63, 0.00, 0.27, 1.00'),
-    textLeaving: CustomEase.create('textLeavingEase', '0.50, 0.00, 0.19, 1.00')
+    textLeaving: CustomEase.create('textLeavingEase', '0.50, 0.00, 0.19, 1.00'),
+    bgLeaving: CustomEase.create('bgLeavingEase', '0.17, 0.00, 0.83, 1.00')
 }
 
 const animations = {
   home: gsapTimeline[0]
+    .from(dom.content.home.img, {
+      y: '90vh',
+      duration: 3,
+      ease: easings.bg
+    },)
     .from(dom.content.home.firstRow.firstText, {
       y: 200,
       stagger: 0.05,
-      duration: 1,
-    })
+      duration: 1.5,
+      ease: easings.text
+    }, 0)
     .from(dom.content.home.firstRow.secondText, {
       y: 200,
       stagger: 0.05,
-      duration: 1,
-      delay: -0.7,
-    })
+      duration: 1.5,
+      ease: easings.text
+    }, 0.3)
     .from(dom.content.home.secondRow, {
       y: 200,
       stagger: 0.05,
       duration: 1,
-      delay: -0.7,
-    }),
+    }, 1)
+        .from(dom.content.home.firstRow.thirdText, {
+      y: 200,
+      stagger: 0.05,
+      duration: 1.5,
+      ease: easings.text
+    },1),
   section1: gsapTimeline[1]
     .from(dom.content.section1.bgImgContainer, {
       y: '100vh',
-      duration: 2,
+      duration: 2.5,
       scale: 1.5,
       rotation: -30,
       x: '20vw',
       ease: easings.bg
     })
     .from(dom.content.section1.bgImg, {
-      duration: 2,
+      duration: 2.5,
       scale: 1.5,
       rotation: -30,
       ease: easings.bg
@@ -128,11 +143,11 @@ const animations = {
       ease: easings.text
     })
   .to(dom.content.section1.bgImg, {
-      scale: 1.5,
+      scale: 1.8,
       rotation: -80,
-      ease: easings.bg,
+      ease: easings.bgLeaving,
       duration: 2
-    }, 0.6)
+    }, 0)
     .to(
       dom.content.section1.img,
       {
@@ -140,23 +155,21 @@ const animations = {
         duration: 2,
         ease: easings.img
       },
-      0.6
+      0.1
     ),
     section2: gsapTimeline[3]
-       .from(dom.content.section2.bgImgContainer, {
+    .from(dom.content.section2.bgImgContainer, {
       y: '100vh',
       duration: 2,
-      scale: 1.5,
-      rotation: -30,
-      x: '20vw',
-      ease: easings.bg
+      ease: easings.bg,
+      delay: 0.5
     })
     .from(dom.content.section2.bgImg, {
       duration: 2,
-      scale: 1.5,
-      rotation: -30,
+    //   scale: 1.3,
+      rotation: 30,
       ease: easings.bg
-    }, 0.2)
+    }, 0.3)
     .from(dom.content.section2.text, {
       x: 100,
       y: 400,
@@ -193,7 +206,6 @@ const handleWheel = (e) => {
       console.log("error");
   }
   if (currentIndex == 0) {
-    animations.home.restart().delay(3);
     animations.section1.reverse();
   }
   if (currentIndex == 1) {
@@ -201,8 +213,11 @@ const handleWheel = (e) => {
     animations.section2.reverse();
   }
   if (currentIndex == 2) {
+      if(animations.section1Leaving.progress() === 0) {
     animations.section1Leaving.restart()
-    animations.section2.play()
+      }
+    animations.section2.delay(2).play()
+    // gsap.delayedCall(1, animations.section2.play())
   }
   window.removeEventListener("mousewheel", handleWheel);
   setTimeout(() => {

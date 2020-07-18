@@ -1,5 +1,4 @@
 @import "./variables.scss";
-// @import "./destyle.css";
 
 body,
 html {
@@ -36,6 +35,10 @@ html {
           position: relative;
           overflow: hidden;
         }
+      }
+      &__second-text-wrapper {
+                    position: relative;
+          overflow: hidden;
       }
     }
 
@@ -83,15 +86,15 @@ html {
     &__container {
         height: 100%;
         overflow: hidden;
-            transform-origin: right top;
+        transform-origin: right top;
 
         &__img {
-            height: 100vh; 
-            width: 100vw;
-            top: 0; 
-            left: 0; 
+            width: 110vw;
+            top: -5vh; 
+            left: -5vw; 
             position: absolute;
-            object-fit: cover; 
+            object-fit: cover;
+            transform-origin: center;
         }
 
       &__content-wrapper {
