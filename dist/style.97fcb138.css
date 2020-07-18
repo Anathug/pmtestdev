@@ -33,6 +33,7 @@ body,
 html {
   font-family: "Wulkan Display";
   margin: 0;
+  overflow: hidden;
 }
 body .home,
 html .home {
@@ -104,17 +105,23 @@ body .slide-2,
 html .slide-1,
 html .slide-2 {
   width: 100vw;
+  height: 100vh;
+  position: fixed;
 }
 body .slide-1__container,
 body .slide-2__container,
 html .slide-1__container,
 html .slide-2__container {
+  height: 100%;
+}
+body .slide-1__container__img,
+body .slide-2__container__img,
+html .slide-1__container__img,
+html .slide-2__container__img {
   height: 140vh;
-  width: 140vw;
-  background-size: cover;
-  background-position: center;
-  margin-top: -20vh;
-  margin-left: -20vw;
+  top: -20vh;
+  position: absolute;
+  left: -20vw;
 }
 body .slide-1__container__content-wrapper,
 body .slide-2__container__content-wrapper,
@@ -138,6 +145,12 @@ html .slide-1__container__content-wrapper__text-wrapper .char,
 html .slide-2__container__content-wrapper__text-wrapper .char {
   color: white;
 }
+body .slide-1__container__content-wrapper__image,
+body .slide-2__container__content-wrapper__image,
+html .slide-1__container__content-wrapper__image,
+html .slide-2__container__content-wrapper__image {
+  z-index: 1;
+}
 body .slide-1__container__content-wrapper__image img,
 body .slide-2__container__content-wrapper__image img,
 html .slide-1__container__content-wrapper__image img,
@@ -147,20 +160,10 @@ html .slide-2__container__content-wrapper__image img {
 body .slide-1,
 html .slide-1 {
   z-index: 2;
-  position: fixed;
-}
-body .slide-1__container,
-html .slide-1__container {
-  background-image: url("/Background_1.e2434892.jpg");
 }
 body .slide-2,
 html .slide-2 {
   z-index: 3;
-  position: fixed;
-}
-body .slide-2__container,
-html .slide-2__container {
-  background-image: url("/Background_2.61749329.jpg");
 }
 
 /*# sourceMappingURL=/style.97fcb138.css.map */

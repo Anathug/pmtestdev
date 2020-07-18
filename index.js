@@ -35,14 +35,14 @@ let dom = {
       text: document.querySelectorAll(
         ".slide-1__container__content-wrapper__text-wrapper__splitting .char"
       ),
-      bgImg: document.querySelector(".slide-1__container"),
+      bgImg: document.querySelector(".slide-1__container img"),
       img: document.querySelector(
         ".slide-1__container__content-wrapper__image img"
       ),
     },
     section2: {
       section: document.querySelector(".slide-2"),
-      bgImg: document.querySelector(".slide-2__container"),
+      bgImg: document.querySelector(".slide-2__container img"),
       img: document.querySelector(
         ".slide-2__container__content-wrapper__image img"
       ),
@@ -54,6 +54,7 @@ let homeTl = gsap.timeline();
 let section1Tl = gsap.timeline({ paused: true });
 let section1TlLeaving = gsap.timeline({ paused: true });
 let section2Tl = gsap.timeline({ paused: true, delay: 1 });
+
 
 const bgEase = CustomEase.create('bgEase', '0.78, 0.00, 0.14, 1.00');
 const textEase = CustomEase.create('textEase', '0.33, 0.00, 0.00, 1.00')
@@ -79,24 +80,24 @@ let animations = {
       delay: -0.7,
     }),
   section1: section1Tl
-      .from(dom.content.section1.text, {
+    .from(dom.content.section1.bgImg, {
+      y: '250vh',
+      duration: 2,
+      scale: 1.5,
+      rotation: -80,
+      x: 600,
+      ease: bgEase
+    })
+    .from(dom.content.section1.text, {
       x: 100,
-      y: 300,
+      y: 400,
       skewX: 50,
       skewY:50,
       stagger: 0.1,
       opacity: 0,
       duration: 3,
       ease: textEase
-    })
-    .from(dom.content.section1.bgImg, {
-      y: 1500,
-      duration: 2,
-      scale: 1.3,
-      rotation: -40,
-      x: 400,
-      ease: bgEase
-    },0.5)
+    }, 0.6)
     .from(
       dom.content.section1.img,
       {
@@ -106,22 +107,32 @@ let animations = {
       },
       0.7
     ),
-  section1Leaving: section1TlLeaving.to(dom.content.section1.text, {
-      y: -200,
-      stagger: 0.1,
+  section1Leaving: section1TlLeaving
+      .to(dom.content.section1.text, {
+      x: 100,
+      y: -400,
+      skewX: 50,
+      skewY:50,
+      stagger: -0.1,
       opacity: 0,
-      duration: 1,
-  })
-  .to(dom.content.section1.img, {
-      y: -1000,
+      duration: 3,
+      ease: textEase
+    })
+  .to(dom.content.section1.bgImg, {
+      scale: 1.5,
+      rotation: -80,
+      ease: bgEase,
       duration: 2
-  }, 0.5),
-  section2: section2Tl.from(dom.content.section2.bgImg, {
-    y: 1500,
-    duration: 1,
-    rotation: -40,
-    x: 400,
-  }),
+    }, 0.6)
+    .to(
+      dom.content.section1.img,
+      {
+        y: -1000,
+        duration: 2,
+        ease: imgEase
+      },
+      0.6
+    ),
 };
 
 const handleWheel = (e) => {
@@ -144,7 +155,7 @@ const handleWheel = (e) => {
   }
   if (currentIndex == 1) {
     animations.section1.play();
-    animations.section2.reverse();
+    // animations.section2.reverse();
   }
   if (currentIndex == 2) {
     animations.section1Leaving.play()

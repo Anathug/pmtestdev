@@ -189,7 +189,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./assets\\fonts\\Wulkan-Display-Light.otf":[["Wulkan-Display-Light.3de83dfe.otf","assets/fonts/Wulkan-Display-Light.otf"],"assets/fonts/Wulkan-Display-Light.otf"],"./assets\\img\\Background_1.jpg":[["Background_1.e2434892.jpg","assets/img/Background_1.jpg"],"assets/img/Background_1.jpg"],"./assets\\img\\Background_2.jpg":[["Background_2.61749329.jpg","assets/img/Background_2.jpg"],"assets/img/Background_2.jpg"],"_css_loader":"../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./assets\\fonts\\Wulkan-Display-Light.otf":[["Wulkan-Display-Light.3de83dfe.otf","assets/fonts/Wulkan-Display-Light.otf"],"assets/fonts/Wulkan-Display-Light.otf"],"_css_loader":"../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
