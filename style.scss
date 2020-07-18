@@ -87,6 +87,7 @@ html {
         height: 100%;
         overflow: hidden;
         transform-origin: right top;
+    background-color: var(--home-text-color);
 
         &__img {
             width: 110vw;
@@ -95,6 +96,7 @@ html {
             position: absolute;
             object-fit: cover;
             transform-origin: center;
+            opacity: 0.5;
         }
 
       &__content-wrapper {

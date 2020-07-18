@@ -63,8 +63,7 @@ const easings = {
     bg: CustomEase.create('bgEase', '0.78, 0.00, 0.14, 1.00'),
     text: CustomEase.create('textEase', '0.33, 0.00, 0.00, 1.00'),
     img:  CustomEase.create('imgEase', '0.63, 0.00, 0.27, 1.00'),
-    textLeaving: CustomEase.create('textLeavingEase', '0.50, 0.00, 0.19, 1.00'),
-    bgLeaving: CustomEase.create('bgLeavingEase', '0.17, 0.00, 0.83, 1.00')
+    textLeaving: CustomEase.create('textLeavingEase', '0.50, 0.00, 0.19, 1.00')
 }
 
 const animations = {
@@ -139,15 +138,15 @@ const animations = {
       skewY:50,
       stagger: -0.1,
       opacity: 0,
-      duration: 3,
+      duration: 4,
       ease: easings.text
     })
   .to(dom.content.section1.bgImg, {
-      scale: 1.8,
+      scale: 2,
       rotation: -80,
-      ease: easings.bgLeaving,
-      duration: 2
-    }, 0)
+      ease: easings.bg,
+      duration: 3
+    }, 0.5)
     .to(
       dom.content.section1.img,
       {
@@ -159,17 +158,17 @@ const animations = {
     ),
     section2: gsapTimeline[3]
     .from(dom.content.section2.bgImgContainer, {
-      y: '100vh',
+      y: '120vh',
       duration: 2,
+      rotation: -40,
       ease: easings.bg,
-      delay: 0.5
+      delay: 1
     })
     .from(dom.content.section2.bgImg, {
-      duration: 2,
-    //   scale: 1.3,
-      rotation: 30,
+      duration: 3,
+      rotation: 40,
       ease: easings.bg
-    }, 0.3)
+    }, 0.8)
     .from(dom.content.section2.text, {
       x: 100,
       y: 400,
@@ -214,10 +213,9 @@ const handleWheel = (e) => {
   }
   if (currentIndex == 2) {
       if(animations.section1Leaving.progress() === 0) {
-    animations.section1Leaving.restart()
+        animations.section1Leaving.restart()
       }
-    animations.section2.delay(2).play()
-    // gsap.delayedCall(1, animations.section2.play())
+    animations.section2.play()
   }
   window.removeEventListener("mousewheel", handleWheel);
   setTimeout(() => {
