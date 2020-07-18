@@ -8326,6 +8326,7 @@ var target = document.querySelectorAll('[data-split]');
   by: "chars"
 });
 var currentIndex = 0;
+var indexCheck = true;
 var dom = (0, _dom.default)();
 var gsapTimeline = [_gsap.gsap.timeline(), _gsap.gsap.timeline({
   paused: true
@@ -8453,13 +8454,15 @@ var handleWheel = function handleWheel(e) {
   if (currentIndex == 1) {
     animations.section1.restart();
     animations.section2.reverse();
+    indexCheck = true;
   }
 
   if (currentIndex == 2) {
-    if (animations.section1Leaving.progress() === 0) {
+    if (indexCheck) {
       animations.section1Leaving.restart();
     }
 
+    indexCheck = false;
     animations.section2.play();
   }
 

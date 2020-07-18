@@ -10,6 +10,7 @@ const target = document.querySelectorAll('[data-split]')
 Splitting({ target: target, by: "chars" });
 
 let currentIndex = 0;
+let indexCheck = true;
 
 const dom = getDom()
 
@@ -160,11 +161,13 @@ const handleWheel = (e) => {
   if (currentIndex == 1) {
     animations.section1.restart();
     animations.section2.reverse();
+    indexCheck = true;
   }
   if (currentIndex == 2) {
-      if(animations.section1Leaving.progress() === 0) {
+      if(indexCheck) {
         animations.section1Leaving.restart()
       }
+    indexCheck = false;
     animations.section2.play()
   }
   window.removeEventListener("mousewheel", handleWheel);
